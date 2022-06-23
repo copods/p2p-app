@@ -9,7 +9,7 @@ import Peer from "simple-peer";
 import io from "socket.io-client";
 import '../styles/global.css'
 
-const socket = io.connect('http://localhost:5001')
+const socket = io.connect('http://localhost:5002')
 export default function Index() {
   const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
