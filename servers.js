@@ -1,10 +1,20 @@
+const cors = require("cors")
 const express = require("express")
 const http = require("http")
 const app = express()
+app.use(cors())
 const server = http.createServer(app)
 const io = require("socket.io")(server, {
 	cors: {
-		origin:'*',
+		origin: "*",
+	},
+	handlePreflightRequest: (req, res) => {
+		res.writeHead(200,{
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "GET, POST",
+			"Access-Control-Allow-Headers": "*",
+		});
+		res.end();
 	}
 })
 
@@ -24,4 +34,4 @@ io.on("connection", (socket) => {
 	})
 })
 
-server.listen(5002, () => console.log("server is running on port 5002"))
+server.listen(5001, () => console.log("server is running on port 5001"))
